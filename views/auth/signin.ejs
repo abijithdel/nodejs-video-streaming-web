@@ -1,0 +1,34 @@
+<title>Sign in</title>
+<section class="signin-page">
+  <div class="rap">
+    <h2>Sign in</h2>
+    <%if (error) { %>
+        <div class="alert alert-danger text-center" role="alert">
+            <%= error %>
+        </div>
+    <% } %>
+    <div class="social-auth">
+        <div class="icon">
+            <a href="">Discord <i class="bi bi-discord"></i></a>
+        </div>
+        <div class="icon">
+            <a href="">Google <i class="bi bi-google"></i></a>
+        </div>
+    </div>
+    <div class="input-div">
+      <form action="" method="post">
+        <label for="email">Email</label>
+        <br>
+        <input type="email" name="email" placeholder="Email" required>
+        <br>
+        <label for="password">Password</label>
+        <br>
+        <input type="password" name="password" placeholder="Password" required>
+        <br>
+        <a href="/auth/signup">Create New Account</a>
+        <br>
+        <button>Sign in</button>
+      </form>
+    </div>
+  </div>
+</section>
