@@ -5,6 +5,7 @@ const session = require('express-session');
 
 const app = express();
 require('./config/mongoose')
+require('./config/discordBot')
 
 const UserRouter = require("./routers/user");
 const AuthRouter = require("./routers/auth");

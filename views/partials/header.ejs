@@ -12,7 +12,16 @@
       </div>
       <div class="auth">
         <%if (user) { %>
-          <img src="/userprofile/<%= user.img %>" alt="username">
+
+          <%if (user.auth_type === 'email') { %>
+            <img src="/userprofile/<%= user.img %>" alt="email">
+          <% } else if (user.auth_type === 'discord') { %>
+             <img src="https://cdn.discordapp.com/avatars/<%= user.Dc_uid %>/<%= user.img %>.png" alt="discord">
+          <% } else if (user.auth_type === 'google') { %>
+            <img src="" alt="google">
+          <% } else { %>
+            <img src="/img/profile.png" alt="error">
+          <% } %>
         <% } else { %>
           <a href="/auth/signin" title="login"><b>Sign in</b></a>
           <a href="/auth/signup" title="create a account"><b>Sign up</b></a>
