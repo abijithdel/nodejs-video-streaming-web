@@ -13,6 +13,7 @@ require("./config/discordBot");
 
 const UserRouter = require("./routers/user");
 const AuthRouter = require("./routers/auth");
+const AdminRouter = require("./routers/admin");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -81,6 +82,7 @@ passport.deserializeUser((user, done) => {
 
 app.use("/", UserRouter);
 app.use("/auth", AuthRouter);
+app.use("/admin", AdminRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server Running..!"));

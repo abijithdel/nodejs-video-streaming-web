@@ -140,9 +140,52 @@ body {
 .home-page .rap .main-div{
     width: 80%;
     height: 100%;
-    background-color: rgb(73, 26, 26);
+    display: flex;
+    flex-wrap: wrap;
 }
 
+.home-page .rap .main-div .video {
+    /* background-color: rgb(17, 22, 48); */
+    margin-left: 10px;
+    height: auto;
+    width: 330px;
+    border-radius: 9px;
+}
+
+
+
+.home-page .rap .main-div .video img{
+    height: 169px;
+    width: 300px;
+    border-radius: 9px;
+    background-color: rgba(0, 0, 0, 0.63);
+}
+
+.home-page .rap .main-div .video img:hover{
+    border-radius: 0;
+}
+
+.home-page .rap .main-div .video .info p{
+    margin: 0;
+    font-size: 23px;
+}
+
+.home-page .rap .main-div .video a{
+    text-decoration: none;
+    color: rgb(240, 232, 232);
+}
+
+.home-page .rap .main-div .video .info{
+    width: 100%;
+}
+
+.home-page .rap .main-div .video .info span{
+    color: gray;
+}
+
+/* .home-page .rap .main-div .video:hover{
+    background-color: rgb(23, 29, 61);
+} */
 
 /* signin-page */
 
@@ -282,6 +325,83 @@ body {
     height: 40px;
     width: 100px;
     margin-top: 10px;
+    border: none;
+    border-radius: 2px;
+    font-weight: 500;
+}
+
+
+/* admin-page */
+
+.admin-page {
+    display: flex;
+    height: 90vh;
+    width: 100%;
+    flex-direction: column;
+}
+
+.admin-page .rap .menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin-page .rap .menu a{
+    text-decoration: none;
+    padding: 10px;
+    background-color: rgb(45, 53, 92);
+    color: rgb(236, 230, 230);
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.admin-page .info{
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.admin-page .info .data-div{
+    text-align: center;
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 8px;
+}
+
+/* new-video-page */
+
+.new-video-page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    width: 100%;
+}
+
+.new-video-page .rap form{
+    padding: 20px;
+    background-color: rgb(45, 53, 92);
+    border-radius: 10px;
+}
+
+.new-video-page .rap form input{
+    width: 300px;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+}
+
+.new-video-page .rap form label{
+    font-weight: 500;
+}
+
+.new-video-page .rap form button{
+    height: 40px;
+    width: 100px;
     border: none;
     border-radius: 2px;
     font-weight: 500;

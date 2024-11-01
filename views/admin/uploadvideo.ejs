@@ -1,0 +1,29 @@
+<title>Create New Video</title>
+<section class="new-video-page">
+    <div class="rap ">
+        <h2 class="text-center">Upload New Video</h2>
+        <form action="/admin/new-video" method="post" enctype="multipart/form-data">
+            <label for="title" >Tittle</label>
+            <br>
+            <input type="text" name="title" placeholder="Title">
+            <br>
+            <label for="description" class="mt-2">Description</label>
+            <br>
+            <input type="text" name="description" placeholder="Description">
+            <br>
+            <label for="video" class="mt-2">Video</label>
+            <br>
+            <input type="file" name="video">
+            <br>
+            <label for="thumbnail" class="mt-2">Thumbnail</label>
+            <br>
+            <input type="file" name="thumbnail">
+            <br>
+            <label for="category" class="mt-2">Category</label>
+            <br>
+            <input type="text" name="category" placeholder="Category">
+            <br>
+            <button class="mt-2">Upload</button>
+        </form>
+    </div>
+</section>
