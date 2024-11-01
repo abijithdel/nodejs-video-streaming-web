@@ -67,13 +67,15 @@ body {
     border-radius: 50px;
     border: 2px solid rgb(54, 63, 110);
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .header-container .rap .header .auth a{
     text-decoration: none;
     margin-right: 10px;
-    color: rgb(62, 72, 121);
+    color: rgb(100, 111, 163);
     padding: 10px;
+    font-weight: 500;
 }
 
 .header-container .rap .header .auth a:hover{
@@ -82,23 +84,65 @@ body {
     color: rgb(29, 36, 68);
 }
 
+.header-container .rap .header .auth .drop-menu{
+    position: absolute;
+    right: 30px;
+    background-color: rgb(45, 53, 92);
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+}
+
+.header-container .rap .header .auth .drop-menu .drop-icon a{
+    background-color: transparent;
+}
+
 /* home page */                                  
 
-.home-page .rap .main-rap {
+.home-page .rap{
     display: flex;
-    height: 90%;
+    height: 90vh;
     width: 100%;
+    flex-direction: row;
 }
 
-.home-page .rap .main-rap .menu-container {
+.home-page .rap .menu-div{
+    width: 20%;
     height: 100%;
-    width: 22%;
+    padding: 10px;
 }
 
-.home-page .rap .main-rap .main-container {
-    height: 100%;
-    width: 78%;
+.home-page .rap .menu-div .menu-icon{
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 1px solid white;
 }
+
+.home-page .rap .menu-div .menu-icon a{
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.home-page .rap .menu-div .menu-icon a:hover{
+    background-color: rgb(45, 53, 92);
+    border-radius: 7px;
+}
+
+.home-page .rap .main-div{
+    width: 80%;
+    height: 100%;
+    background-color: rgb(73, 26, 26);
+}
+
 
 /* signin-page */
 

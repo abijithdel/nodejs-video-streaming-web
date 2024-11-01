@@ -4,12 +4,23 @@ const UserModel = require("../config/schema/user");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
 const config = require("../config");
+const passport = require('passport');
 
-router.get("/signin", (req, res) => {
+
+function islogin(req,res,nest){
+    if(req.session.login){
+        res.redirect('/')
+    }else{
+        nest()
+    }
+}
+
+
+router.get("/signin",islogin, (req, res) => {
     res.render("auth/signin", { user: req.session.user, error: undefined });
 });
 
-router.get("/signup", (req, res) => {
+router.get("/signup",islogin, (req, res) => {
     res.render("auth/signup", { user: req.session.user, error: undefined });
 });
 
@@ -100,7 +111,7 @@ router.get("/discord/callback", async (req, res) => {
 
         if (userResponse.data.email) {
             const user = await UserModel.findOne({ email: userResponse.data.email });
-            
+
             if (user) {
                 // Check auth_type only if the user exists
                 if (user.auth_type === "discord") {
@@ -121,7 +132,7 @@ router.get("/discord/callback", async (req, res) => {
                     auth_type: type,
                     Dc_uid: userResponse.data.id
                 });
-                
+
                 req.session.user = NewUser;
                 req.session.login = true;
                 await NewUser.save();
@@ -134,6 +145,44 @@ router.get("/discord/callback", async (req, res) => {
         console.log(error);
         res.status(500).send("Server Error");
     }
+});
+
+// google
+
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: 'auth/signup' }),
+    async (req, res) => {
+        try {
+            const { email } = req.user._json
+            const user = await UserModel.findOne({ email: email })
+            req.session.user = user;
+            req.session.login = true;
+            res.redirect('/');
+        } catch (error) {
+            console.log(error)
+            res.status(404).send('Error')
+        }
+    });
+
+
+router.get('/error', (req, res) => {
+    res.render('error', { message: 'There was an issue with Google authentication.' });
+});
+
+router.get('/logout', (req, res) => {
+    req.logout((err) => {
+        if (err) {
+            console.error(err); 
+            return res.redirect('/'); 
+        }
+        req.session.destroy((err) => {
+            if (err) {
+                console.error(err); 
+            }
+            res.redirect('/'); 
+        });
+    });
 });
 
 module.exports = router;

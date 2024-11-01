@@ -14,14 +14,22 @@
         <%if (user) { %>
 
           <%if (user.auth_type === 'email') { %>
-            <img src="/userprofile/<%= user.img %>" alt="email">
+            <img src="/userprofile/<%= user.img %>" alt="email" class="profile">
           <% } else if (user.auth_type === 'discord') { %>
-             <img src="https://cdn.discordapp.com/avatars/<%= user.Dc_uid %>/<%= user.img %>.png" alt="discord">
+             <img src="https://cdn.discordapp.com/avatars/<%= user.Dc_uid %>/<%= user.img %>.png" alt="discord" class="profile">
           <% } else if (user.auth_type === 'google') { %>
-            <img src="" alt="google">
+            <img src="<%= user.img %>" alt="google" class="profile">
           <% } else { %>
-            <img src="/img/profile.png" alt="error">
+            <img src="/img/profile.png" alt="error" class="profile">
           <% } %>
+            <div class="drop-menu">
+              <div class="drop-icon">
+                <a href="" class="mt-3">Account</a>
+              </div>
+              <div class="drop-icon">
+                <a href="/auth/logout" class="mt-3 text-danger">logout</a>
+              </div>
+            </div>
         <% } else { %>
           <a href="/auth/signin" title="login"><b>Sign in</b></a>
           <a href="/auth/signup" title="create a account"><b>Sign up</b></a>
