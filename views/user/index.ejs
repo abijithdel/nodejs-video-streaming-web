@@ -14,6 +14,12 @@
             </div>
             <div class="history-div">
                 <h3 class="text-center">History</h3>
+                <% for (let key in historylog) { %>
+                <div class="text-center history mt-2">
+                    <img src="/videos/img/<%= historylog[key].img %>" alt="img ">
+                    <span><%= historylog[key].title %>..</span>
+                </div>
+                <% } %>
             </div>
         </div>
         <div class="main-div p-1">

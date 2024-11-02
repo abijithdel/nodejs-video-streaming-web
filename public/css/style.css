@@ -97,6 +97,61 @@ body {
     background-color: transparent;
 }
 
+.header-container .rap .header .nav-icon img{
+    height: 30px;
+    display: none;
+}
+
+.header-container .rap .header .nav-icon{
+    display: none;
+    cursor: pointer;
+    z-index: 9;
+}
+
+/* .header-container .rap .header .nav-menu{
+    width: 40%;
+    height: 200vh;
+    background-color: aliceblue;
+    position: absolute;
+    right: 0;
+} */
+
+@media only screen and (max-width: 700px){
+    .header-container .rap .header .title h1{
+        display: none;
+    }
+
+    .header-container .rap .header .auth{
+        display: none;
+    }
+
+    .header-container .rap .header{
+        justify-content: end;
+    }
+
+    .header-container .rap .header .search-container {
+        display: none;
+    }
+
+    .header-container .rap .header .search-container form button{
+        display: none;
+    }
+    
+    .header-container .rap .header .search-container form input{
+        width: 100%;
+    }
+
+    .header-container .rap .header .nav-icon{
+        display: block;
+        justify-content: end;
+    }
+
+    .header-container .rap .header .nav-icon img{
+        display: block;
+        justify-content: end;
+    }
+}
+
 /* home page */                                  
 
 .home-page .rap{
@@ -110,6 +165,7 @@ body {
     width: 20%;
     height: 100%;
     padding: 10px;
+    overflow: auto;
 }
 
 .home-page .rap .menu-div .menu-icon{
@@ -137,15 +193,25 @@ body {
     border-radius: 7px;
 }
 
+.home-page .rap .menu-div .history-div .history img{
+    height: 30px;
+    width: 60px;
+    border-radius: 6px;
+}
+
+.home-page .rap .menu-div .history-div .history{
+    cursor: pointer;
+}
+
 .home-page .rap .main-div{
     width: 80%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+    overflow: auto;
 }
 
 .home-page .rap .main-div .video {
-    /* background-color: rgb(17, 22, 48); */
     margin-left: 10px;
     height: auto;
     width: 330px;
@@ -183,9 +249,30 @@ body {
     color: gray;
 }
 
-/* .home-page .rap .main-div .video:hover{
-    background-color: rgb(23, 29, 61);
-} */
+@media only screen and (max-width: 700px) {
+    .home-page .rap .menu-div{
+        display: none;
+    }
+
+
+
+    .home-page .rap .main-div .video {
+        width: 100%;
+    }
+
+    .home-page .rap .main-div{
+        width: 100%;
+    }
+
+    .home-page .rap .main-div .video img{
+        width: 100%;
+        height: 200px;
+    }
+
+    .home-page .rap{
+        width: 100%;
+    }
+}
 
 /* signin-page */
 
@@ -405,4 +492,38 @@ body {
     border: none;
     border-radius: 2px;
     font-weight: 500;
+}
+
+/* video-pag */
+
+.video-page .video-div{
+    display: flex;
+}
+
+.video-page .video-div .video{
+    height: 90vh;
+    width: 70%;
+}
+
+.video-page .video-div .suggestions{
+    height: 90vh;
+    width: 30%;
+}
+
+.video-page .video-div .video video{
+    width: 100%;
+    border: 10px;
+    border-radius: 10px;
+}
+
+.video-page .video-div .video .info button{
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+    margin-right: 30px;
+}
+
+.video-page .video-div .video .info span{
+    color: grey;
 }
