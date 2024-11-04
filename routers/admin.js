@@ -50,4 +50,20 @@ routes.post('/new-video', islogin, isadmin, upload.fields([{ name: 'video' }, { 
     }
 })
 
+routes.get('/all-videos',islogin, isadmin, async (req,res) => {
+    try {
+        const video = await VideoModel.find()
+        if(video.length > 0){
+            for (let index = 0; index < video.length; index++) {    
+                const title = video[index].title.substring(0,10) 
+                video[index].title = title    
+            }
+        }
+        res.status(200).render('admin/all-videos', {user:req.session.user,video})
+    } catch (error) {
+        console.log(error)
+        res.status(400).send('Server Error')
+    }
+})
+
 module.exports = routes;

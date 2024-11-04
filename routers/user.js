@@ -28,11 +28,15 @@ routes.get('/', async (req, res) => {
         if (req.session.login) {
             const userid = req.session.user._id
             const history = await HistoryModel.findOne({ user_id: userid })
-            for (var key = 0; key < history.vidoes.length; key++) {
-                const video = await VideoModel.findById(history.vidoes[key].vid)
-                const title = video.title.substring(0, 17)
-                video.title = title
-                historylog.push(video)
+            if(history){
+                for (var key = 0; key < history.vidoes.length; key++) {
+                    const video = await VideoModel.findById(history.vidoes[key].vid)
+                    const title = video.title.substring(0, 17)
+                    video.title = title
+                    historylog.push(video)
+                }
+            }else{
+                console.log('New user log in')
             }
 
         }

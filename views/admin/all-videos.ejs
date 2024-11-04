@@ -1,0 +1,34 @@
+<title>All videos</title>
+<section class="admin-all-video">
+    <div class="back-btn container">
+        <a class="btn btn-outline-info" href="/admin"><i class="bi bi-arrow-left"></i> Back</a>
+    </div>
+    <h3 class="text-center">All Videos</h3>
+    <div class="videos container text-white">
+        <table class="table text-white">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                    <th scope="col">Candrole</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let key in video) { %>
+                <tr>
+                    <th scope="row"><%= key %></th>
+                    <td><img style="height: 35px; width: 60px; border-radius: 9px;" src="/videos/img/<%= video[key].img %>" alt=""></td>
+                    <td><%= video[key].title %></td>
+                    <td><%= video[key].category %></td>
+                    <td>
+                        <i class="bi bi-pencil-square cursor-pointer"></i> | 
+                        <i class="bi bi-trash3-fill cursor-pointer"></i>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</section>
