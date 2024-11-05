@@ -207,6 +207,10 @@ body {
     cursor: pointer;
 }
 
+.home-page .rap .menu-div .mob-icons {
+    display: none;
+}
+
 .home-page .rap .main-div{
     width: 80%;
     height: 100%;
@@ -253,13 +257,14 @@ body {
     color: gray;
 }
 
+
 @media only screen and (max-width: 700px) {
     .home-page .rap .menu-div{
         width: 100%;
         display: none;
     }
 
-    .home-page .rap .menu-div .history-div{
+    .home-page .rap .menu-div .history-div{ 
         display: none;
     }
 
@@ -278,6 +283,10 @@ body {
 
     .home-page .rap{
         width: 100%;
+    }
+
+    .home-page .rap .menu-div .mob-icons {
+        display: block;
     }
 }
 

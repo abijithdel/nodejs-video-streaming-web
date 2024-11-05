@@ -2,6 +2,7 @@ const express = require('express')
 const routes = express.Router()
 const upload = require('../config/multer')
 const VideoModel = require('../config/schema/video')
+const UserModel = require('../config/schema/user')
 
 function isadmin(req, res, nest) {
     if (req.session.user.admin) {
@@ -60,6 +61,16 @@ routes.get('/all-videos',islogin, isadmin, async (req,res) => {
             }
         }
         res.status(200).render('admin/all-videos', {user:req.session.user,video})
+    } catch (error) {
+        console.log(error)
+        res.status(400).send('Server Error')
+    }
+})
+
+routes.get('/all-users', islogin, isadmin, async (req,res) => {
+    try {
+        const users = await UserModel.find()
+        res.status(200).render('admin/all-users',{user:req.session.user, users})
     } catch (error) {
         console.log(error)
         res.status(400).send('Server Error')

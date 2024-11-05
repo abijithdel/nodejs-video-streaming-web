@@ -1,0 +1,47 @@
+<title>All Users</title>
+<section class="all-users-page">
+    <div class="rap">
+        <div class="back-btn container mt-2">
+            <a class="btn btn-outline-info" href="/admin"><i class="bi bi-arrow-left"></i> Back</a>
+        </div>
+    </div>
+    <div class="main container mt-3">
+        <table class="table text-white">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Profile</th>
+                <th scope="col">Type</th>
+                <th scope="col">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% for (let key in users) { %>
+              <tr>
+                <th scope="row"><%= parseInt(key) + 1 %></th>
+                <td><%= users[key].email %></td>
+
+                <td>
+                    <% if (users[key].auth_type === 'email') { %>
+                        <img style="height: 35px; width: 35px; border-radius: 50%;" src="/userprofile/<%= users[key].img %>" alt="Profile Image">
+                    <% } else if (users[key].auth_type === 'google') { %>
+                        <img style="height: 35px; width: 35px; border-radius: 50%;" src="<%= users[key].img %>" alt="Google Profile">
+                    <% } else if (users[key].auth_type === 'discord') { %>
+                        <img style="height: 35px; width: 35px; border-radius: 50%;" src="https://cdn.discordapp.com/avatars/<%= users[key].Dc_uid %>/<%= users[key].img %>.png" alt="Discord Profile">
+                    <% } else { %>
+                        <img style="height: 35px; width: 35px; border-radius: 50%;" src="/public/img/profile.png" alt="Default Profile">
+                    <% } %>
+                </td>
+
+                <td><%= users[key].auth_type %></td>
+                <td>
+                    <a href="/edit-user/<%= users[key]._id %>" class="text-info"><i class="bi bi-pencil-square cursor-pointer"></i></a> | 
+                    <a href="/delete-user/<%= users[key]._id %>" class="text-danger"><i class="bi bi-trash3-fill cursor-pointer"></i></a>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+    </div>
+</section>
