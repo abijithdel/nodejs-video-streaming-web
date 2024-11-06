@@ -17,17 +17,25 @@
             </thead>
             <tbody>
                 <% for (let key in video) { %>
-                <tr>
-                    <th scope="row"><%= key %></th>
-                    <td><img style="height: 35px; width: 60px; border-radius: 9px;" src="/videos/img/<%= video[key].img %>" alt=""></td>
-                    <td><%= video[key].title %></td>
-                    <td><%= video[key].category %></td>
-                    <td>
-                        <i class="bi bi-pencil-square cursor-pointer"></i> | 
-                        <i class="bi bi-trash3-fill cursor-pointer"></i>
-                    </td>
-                </tr>
-                <% } %>
+                    <tr>
+                        <th scope="row">
+                            <%= key %>
+                        </th>
+                        <td><img style="height: 35px; width: 60px; border-radius: 9px;"
+                                src="/videos/img/<%= video[key].img %>" alt=""></td>
+                        <td>
+                            <%= video[key].title %>
+                        </td>
+                        <td>
+                            <%= video[key].category %>
+                        </td>
+                        <td>
+                            <i id="edit-video" class="bi bi-pencil-square cursor-pointer"
+                                data-id="<%= video[key]._id %>"></i> |
+                            <a href="/admin/delete-video/<%= video[key]._id %>" style="text-decoration: none; color: white;"><i class="bi bi-trash3-fill cursor-pointer"></i></a>
+                        </td>
+                    </tr>
+                    <% } %>
             </tbody>
         </table>
     </div>

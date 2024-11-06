@@ -77,4 +77,33 @@ routes.get('/all-users', islogin, isadmin, async (req,res) => {
     }
 })
 
+routes.get('/delete-video/:id', islogin, isadmin, async (req,res) => {
+    try {
+        const { id } = req.params;
+        const video = await VideoModel.findById(id)
+        const title = video.title.substring(0,50)
+        video.title = title
+        res.status(200).render('admin/delete-video',{user:req.session.user,video})
+    } catch (error) {
+        
+    }
+})
+
+routes.post('/delete-video/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedVideo = await VideoModel.findByIdAndDelete(id);
+        
+        if (!deletedVideo) {
+            return res.status(404).send('Video not found');
+        }
+
+        res.status(200).redirect('/admin/all-videos');
+    } catch (error) {
+        console.error('Error deleting video:', error);
+        res.status(500).send('Server Error');
+    }
+});
+
+
 module.exports = routes;

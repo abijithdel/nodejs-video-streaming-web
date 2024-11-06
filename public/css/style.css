@@ -549,3 +549,86 @@ body {
 .video-page .video-div .video .info span{
     color: grey;
 }
+
+.video-page .video-div .suggestions{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.video-page .video-div .suggestions .video {
+    width: 100%;
+}
+
+.video-page .video-div .suggestions .video a{
+    text-decoration: none;
+    color: white;
+}
+
+.video-page .video-div .suggestions .video a img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.video-page .video-div .suggestions .video a span{
+    color: gray;
+}
+
+@media only screen and (max-width: 700px) {
+    .video-page .video-div {
+        flex-direction: column;
+    }
+
+    .video-page .video-div .video {
+        width: 100%;
+        height: auto;
+    }
+
+    .video-page .video-div .suggestions {
+        width: 100%;
+    }
+}
+
+/* delete-video-page */
+
+.delete-video-page {
+    height: 90vh;
+    width: 100%;
+}
+
+.delete-video-page .rap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.delete-video-page .rap .video {
+    height: 100%;
+    width: 100%;
+}
+
+.delete-video-page .rap .video a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+}
+
+.delete-video-page .rap .video a img{
+    width: 40%;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 700px) {
+    .delete-video-page .rap .video a img{
+        width: 90%;
+        border-radius: 10px;
+    }
+}

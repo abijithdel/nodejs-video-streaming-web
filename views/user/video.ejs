@@ -7,7 +7,17 @@
             </video>
             <div class="info">
                 <h4><%= video.title %></h4>
-                <button id="likeaction"><i class="bi bi-hand-thumbs-up"></i> <%= video.like %></button>
+                <% if (isliked) { %>
+                    <button id="likeaction">
+                        <i id="like-icon" class="bi bi-hand-thumbs-up-fill"></i> 
+                        <span id="like"><%= video.like %></span>
+                    </button>
+                <% } else { %>
+                    <button id="likeaction">
+                        <i id="like-icon" class="bi bi-hand-thumbs-up"></i> 
+                        <span id="like"><%= video.like %></span>
+                    </button>
+                <% } %>
                 <span><i class="bi bi-eye"></i> <%= video.views %></span> | 
                 <span class="ml-3"><i class="bi bi-card-list"></i> <%= video.category %></span>
                 <div class="description mt-3">
@@ -15,24 +25,43 @@
                 </div>
             </div>
         </div>
-        <div class="suggestions"></div>
+        <div class="suggestions p-3">
+            <% for (let key in videos) { %>
+            <div class="video mt-3">
+                <a href="">
+                    <img src="/videos/img/<%= videos[key].img %>" alt="video-img">
+                    <h5><%= videos[key].title %>...</h5>
+                    <span><%= videos[key].views %> Views</span> | 
+                    <span><%= videos[key].category %></span>
+                </a>
+            </div>
+            <% } %>
+        </div>
     </div>
     <span id="video_id" style="display: none;"><%= video._id %></span>
 </section>
 
 <script>
-    let vid = $('#video_id').text()
-       $('#likeaction').click(function (){
-        $.ajax({
-            type:'GET',
-            url: '/likeaction',
-            data: { videoId: vid },
-            success: function(response){
-                console.log(response)
-            },
-            error: function (error){
+    $(document).ready(function() {
+        let vid = $('#video_id').text();
 
-            }
-        })
-    })
+        $('#likeaction').click(function() {
+            $.ajax({
+                type: 'GET',
+                url: '/likeaction',
+                data: { videoId: vid },
+                success: function(response) {
+                    if (response.isliked) {
+                        $('#like-icon').removeClass('bi-hand-thumbs-up').addClass('bi-hand-thumbs-up-fill');
+                    } else {
+                        $('#like-icon').removeClass('bi-hand-thumbs-up-fill').addClass('bi-hand-thumbs-up');
+                    }
+                    $('#like').text(response.like); // Update like count
+                },
+                error: function(error) {
+                    console.error("Error:", error);
+                }
+            });
+        });
+    });
 </script>
