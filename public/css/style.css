@@ -5,6 +5,7 @@ body {
     color: rgb(224, 224, 224);
 }
 
+
 .cursor-pointer{
     cursor: pointer;
 }
@@ -112,13 +113,22 @@ body {
     z-index: 9;
 }
 
-/* .header-container .rap .header .nav-menu{
-    width: 40%;
-    height: 200vh;
-    background-color: aliceblue;
-    position: absolute;
-    right: 0;
-} */
+.header-menu{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.header-menu a{
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    width: 100%;
+    font-weight: 500;
+    margin: 10px;
+}
 
 @media only screen and (max-width: 700px){
     .header-container .rap .header .title h1{
@@ -260,7 +270,6 @@ body {
 
 @media only screen and (max-width: 700px) {
     .home-page .rap .menu-div{
-        width: 100%;
         display: none;
     }
 
@@ -630,5 +639,85 @@ body {
     .delete-video-page .rap .video a img{
         width: 90%;
         border-radius: 10px;
+    }
+}
+
+/* account-page */
+
+.account-page {
+    height: 90vh;
+    width: 100%;
+}
+
+.account-page .rap{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+}
+
+.account-page .rap .ac-menu{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.account-page .rap .ac-menu a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    font-size: 18px;
+}
+
+.account-page .rap .ac-menu a:hover{
+    background-color: rgb(45, 53, 92);
+    border-radius: 10px;
+}
+
+.account-page .rap .ac-main{
+    width: 80%;
+    height: 100%;
+}
+
+.account-page .rap .ac-main .info{
+    display: flex;
+    justify-content: space-around;
+}
+
+.account-page .rap .info div{
+    height: auto;
+    width: 30%;
+    background-color: azure;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.account-page .rap .info div span{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+    .account-page .rap .ac-menu a span{
+        display: none;
+    }
+
+    .account-page .rap .ac-main {
+        padding: 20px;
+    }
+
+    .account-page .rap .ac-main .info {
+        flex-direction: column;
+    }
+
+    .account-page .rap .ac-main .info div{
+        width: 100%;
+        margin-top: 10px;
     }
 }

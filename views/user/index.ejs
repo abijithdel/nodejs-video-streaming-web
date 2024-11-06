@@ -1,7 +1,7 @@
 <title>Home</title>
-<section class="home-page">
+<section class="home-page sections">
     <div class="rap">
-        <div class="menu-div" id="menu-div">
+        <div class="menu-div index-menu" id="menu-div">
             <div class="menu-icon mt-2">
                 <a href="/"><i class="bi bi-house-door-fill"></i> Home</a>
                 <a href="" class="mt-1"><i class="bi bi-record-circle"></i> Anime</a>
@@ -28,7 +28,7 @@
                     <% } %>
             </div>
         </div>
-        <div class="main-div p-1" id="main-div">
+        <div class="main-div index-main p-1" id="main-div">
             <% for (let key in allvideo) { %>
                 <div class="video p-3">
                     <a href="/video/<%= allvideo[key]._id %>">
@@ -50,9 +50,3 @@
         </div>
     </div>
 </section>
-<script>
-    $('.nav-icon').click(function () {
-        $('#menu-div').toggle()
-        $('#main-div').toggle()
-    })
-</script>

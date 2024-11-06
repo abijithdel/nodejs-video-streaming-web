@@ -28,14 +28,16 @@ routes.get('/', async (req, res) => {
         if (req.session.login) {
             const userid = req.session.user._id
             const history = await HistoryModel.findOne({ user_id: userid })
-            if(history){
+            if (history) {
                 for (var key = 0; key < history.vidoes.length; key++) {
                     const video = await VideoModel.findById(history.vidoes[key].vid)
-                    const title = video.title.substring(0, 17)
-                    video.title = title
-                    historylog.push(video)
+                    if (video) {
+                        const title = video.title.substring(0, 17)
+                        video.title = title
+                        historylog.push(video)
+                    }
                 }
-            }else{
+            } else {
                 console.log('New user log in')
             }
 
@@ -63,19 +65,19 @@ routes.get('/video/:id', islogin, async (req, res) => {
             vidoes: { $elemMatch: { vid: id } }
         });
 
-        for(let key in videos){
-            const title = videos[key].title.substring(0,30)
+        for (let key in videos) {
+            const title = videos[key].title.substring(0, 30)
             videos[key].title = title
         }
 
-        if(inlike){
+        if (inlike) {
             isliked = true
-        }else{
+        } else {
             isliked = false
         }
 
         if (history) {
-            return res.status(200).render('user/video', { user: req.session.user, video, isliked, videos});
+            return res.status(200).render('user/video', { user: req.session.user, video, isliked, videos });
         } else {
             const newHistory = await HistoryModel.findOneAndUpdate(
                 { user_id: userId },
@@ -83,7 +85,7 @@ routes.get('/video/:id', islogin, async (req, res) => {
                 { new: true, upsert: true }
             );
             await VideoModel.findByIdAndUpdate(id, { $inc: { views: 1 } });
-            return res.status(200).render('user/video', { user: req.session.user, video, isliked, videos});
+            return res.status(200).render('user/video', { user: req.session.user, video, isliked, videos });
         }
     } catch (error) {
         console.error("Error occurred:", error);
@@ -115,7 +117,7 @@ routes.get('/likeaction', async (req, res) => {
             const video = await VideoModel.findByIdAndUpdate(
                 videoId,
                 { $inc: { like: -1 } },
-                { new: true, upsert: true}
+                { new: true, upsert: true }
             );
 
             if (!video) {
@@ -149,5 +151,25 @@ routes.get('/likeaction', async (req, res) => {
         res.status(500).json({ error: 'An error occurred while processing your request' });
     }
 });
+
+routes.get('/account/:id', islogin, async (req, res) => {
+    try {
+        let historyCount = 0
+        let likeCount = 0
+        let playlistCount = 0
+        const { id } = req.params
+        const history = await HistoryModel.findOne({ user_id: id })
+        const likes = await LikeModel.findOne({ user_id: id })
+        if(history){
+            historyCount = history.vidoes.length
+        }
+        if(likes){
+            likeCount = likes.vidoes.length
+        }
+        res.status(200).render('user/account', { user: req.session.user, historyCount, likeCount, playlistCount })
+    } catch (error) {
+        res.status(400).send('Server Error')
+    }
+})
 
 module.exports = routes;
