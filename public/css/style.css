@@ -127,7 +127,6 @@ body {
     padding: 10px;
     width: 100%;
     font-weight: 500;
-    margin: 10px;
 }
 
 @media only screen and (max-width: 700px){
@@ -719,5 +718,101 @@ body {
     .account-page .rap .ac-main .info div{
         width: 100%;
         margin-top: 10px;
+    }
+}
+
+/* history-page */
+
+.history-page {
+    height: 90vh;
+    width: 100%;
+}
+
+.history-page .rap {
+    height: 100%;
+    width: 100%;
+}
+
+.history-page .rap .videos {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.history-page .rap .videos a {
+    text-decoration: none;
+    color: white;
+    width: 30%;
+    margin-left: 10px;
+    height: auto;
+}
+
+
+.history-page .rap .videos a img{
+    width: 100%;
+    height: 50%;
+    border-radius: 10px;
+}
+
+.history-page .rap .videos a div span{
+    color: gray;
+}
+
+.history-page .rap .videos a div p {
+    color: rgb(88, 83, 83);
+    font-size: 15px;
+    margin: 0;
+}
+
+@media only screen and (max-width: 800px) {
+    .history-page .rap .videos a {
+        width: 100%;
+    }
+}
+
+/* likes-page */
+
+.likes-page {
+    height: 90vh;
+    width: 100%;
+}
+
+.likes-page .rap{
+    width: 100%;
+    height: 100%;
+}
+
+.likes-page .rap .videos{
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.likes-page .rap .videos a {
+    width: 30%;
+    text-decoration: none;
+    color: white;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.likes-page .rap .videos a img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.likes-page .rap .videos a div {
+    color: gray;
+}
+
+.likes-page .rap .videos a div p{
+    font-size: 15px;
+    color: rgb(104, 98, 98);
+}
+
+@media only screen and (max-width: 700px) {
+    .likes-page .rap .videos a{
+        width: 100%;
     }
 }

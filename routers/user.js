@@ -38,7 +38,7 @@ routes.get('/', async (req, res) => {
                     }
                 }
             } else {
-                console.log('New user log in')
+                console.log('log in')
             }
 
         }
@@ -153,22 +153,80 @@ routes.get('/likeaction', async (req, res) => {
 });
 
 routes.get('/account/:id', islogin, async (req, res) => {
-    try {
-        let historyCount = 0
-        let likeCount = 0
-        let playlistCount = 0
-        const { id } = req.params
-        const history = await HistoryModel.findOne({ user_id: id })
-        const likes = await LikeModel.findOne({ user_id: id })
-        if(history){
-            historyCount = history.vidoes.length
+    const { id } = req.params
+    const uid = req.session.user._id
+    if (id === uid) {
+        try {
+            let historyCount = 0
+            let likeCount = 0
+            let playlistCount = 0
+            const history = await HistoryModel.findOne({ user_id: id })
+            const likes = await LikeModel.findOne({ user_id: id })
+            if (history) {
+                historyCount = history.vidoes.length
+            }
+            if (likes) {
+                likeCount = likes.vidoes.length
+            }
+            res.status(200).render('user/account', { user: req.session.user, historyCount, likeCount, playlistCount })
+        } catch (error) {
+            res.status(400).send('Server Error')
         }
-        if(likes){
-            likeCount = likes.vidoes.length
+    } else {
+        res.status(406).render('error', { statusCode: 406, user: req.session.user })
+    }
+})
+
+routes.get('/ac/history/:id', islogin, async (req, res) => {
+    const { id } = req.params
+    const uid = req.session.user._id
+    if (id === uid) {
+        try {
+            let historyVid = [];
+            const history = await HistoryModel.findOne({ user_id: uid })
+            if (history) {
+                for (let key in history.vidoes) {
+                    const video = await VideoModel.findById(history.vidoes[key].vid)
+                    if (video) {
+                        const title = video.title.substring(0, 59)
+                        video.title = title
+                        const description = video.description.substring(0, 100)
+                        video.description = description
+                        historyVid.push(video)
+                    }
+                }
+            }
+            res.status(200).render('user/history', { user: req.session.user, historyVid })
+        } catch (error) {
+            console.log(error)
+            res.status(400).send('Server Error')
         }
-        res.status(200).render('user/account', { user: req.session.user, historyCount, likeCount, playlistCount })
-    } catch (error) {
-        res.status(400).send('Server Error')
+    } else {
+        res.status(406).render('error', { statusCode: 406, user: req.session.user })
+    }
+})
+
+routes.get('/ac/likes/:id', islogin, async (req, res) => {
+    const id = req.params.id
+    const uid = req.session.user._id
+    if (id === uid) {
+        let likesVid = [];
+        const likes = await LikeModel.findOne({ user_id: uid })
+        if (likes) {
+            for (let key in likes.vidoes) {
+                const video = await VideoModel.findById(likes.vidoes[key].vid)
+                if (video) {
+                    const title = video.title.substring(0, 59)
+                    video.title = title
+                    const description = video.description.substring(0, 100)
+                    video.description = description
+                    likesVid.push(video)
+                }
+            }
+        }
+        res.status(200).render('user/likes', { user: req.session.user, likesVid })
+    } else {
+        res.status(406).render('error', { statusCode: 406, user: req.session.user })
     }
 })
 
