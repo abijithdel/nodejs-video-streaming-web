@@ -816,3 +816,53 @@ body {
         width: 100%;
     }
 }
+
+/* edit-page */
+
+.edit-page {
+    height: 90vh;
+    width: 100%;
+}
+
+.edit-page .rap {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.edit-page .rap  form {
+    padding: 20px;
+    background-color: rgb(45, 53, 92);
+    border-radius: 10px;
+}
+
+.edit-page .rap  form input{
+    width: 270px;
+    height: 40px;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    padding-left: 10px;
+}
+
+.edit-page .rap  form label{
+    font-weight: 500;
+}
+
+.edit-page .rap  form button{
+    height: 40px;
+    width: 100px;
+    background-color: transparent;
+    color: aqua;
+    border: 1px solid aqua;
+    border-radius: 4px;
+}
+
+.edit-page .rap  form button:hover{
+    background-color: aqua;
+    color: black;
+    border: 1px solid black;
+}

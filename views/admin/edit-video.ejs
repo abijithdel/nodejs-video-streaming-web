@@ -1,0 +1,27 @@
+<title><%= video.title %></title>
+<section class="edit-page">
+    <div class="rap">
+        <h2 class="text-center mb-3">Edit Video</h2>
+        <form action="/admin/edit-video/<%= video._id %>" method="post" enctype="multipart/form-data">
+            <label for="title">Tittle</label>
+            <br>
+            <input type="text" name="title" placeholder="Title" value="<%= video.title %>">
+            <br>
+            <label for="description" class="mt-2">Description</label>
+            <br>
+            <input type="text" name="description" placeholder="Description" value="<%= video.description %>">
+            <br>
+            <label for="thumbnail" class="mt-2">Thumbnail</label>
+            <br>
+            <input type="file" name="thumbnail">
+            <br>
+            <img src="/videos/img/<%= video.img %>" alt="img" style="height: 40px; width: 70px; border-radius: 5px;">
+            <br>
+            <label for="category" class="mt-2">Category</label>
+            <br>
+            <input type="text" name="category" placeholder="Category" value="<%= video.category %>">
+            <br>
+            <button class="mt-2">Edit Video</button>
+        </form>
+    </div>
+</section>
