@@ -1,0 +1,15 @@
+<title><%= search %></title>
+<section class="search-page">
+    <div class="rap">
+        <div class="video container mt-3">
+            <% for (let key in video) { %>
+            <a href="">
+                <img src="/videos/img/<%= video[key].img %>" alt="img">
+                <h5><%= video[key].title %></h5>
+                <span><%= video[key].views %> Views</span> | 
+                <span><%= video[key].category %></span>
+            </a>
+            <% } %>
+        </div>
+    </div>
+</section>

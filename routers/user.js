@@ -3,7 +3,8 @@ const routes = express.Router()
 const VideoModel = require('../config/schema/video')
 const HistoryModel = require('../config/schema/history')
 const LikeModel = require('../config/schema/likes')
-
+const UserModel = require('../config/schema/user')
+const upload = require('../config/multer')
 
 function islogin(req, res, nest) {
     if (req.session.login) {
@@ -227,6 +228,50 @@ routes.get('/ac/likes/:id', islogin, async (req, res) => {
         res.status(200).render('user/likes', { user: req.session.user, likesVid })
     } else {
         res.status(406).render('error', { statusCode: 406, user: req.session.user })
+    }
+})
+
+routes.get('/ac/edit-profile/:id', islogin, async (req, res) => {
+    try {
+        const id = req.params.id
+        const uid = req.session.user._id
+        if (id === uid) {
+            res.status(200).render('user/edit-ac', { user: req.session.user })
+        } else {
+            res.status(406).render('error', { statusCode: 406, user: req.session.user })
+        }
+    } catch (error) {
+
+    }
+})
+
+routes.post('/ac/edit/', upload.fields([{ name: 'profile' }]), async (req, res) => {
+    try {
+        const uid = req.session.user._id;
+        const { email } = req.body;
+        const ProfileImg = req.files['profile'] ? req.files['profile'][0].filename : null;
+        const user = await UserModel.findById(uid)
+        if(ProfileImg){
+            user.img = ProfileImg
+        }else{
+            user.email = email
+        }
+        await user.save()
+        req.session.user = user
+        res.status(200).redirect(`/account/${uid}`)
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        res.status(500).render('error', { statusCode: 500, message: "An error occurred while updating the profile", user: req.session.user });
+    }
+});
+
+routes.post('/search', async (req, res) => {
+    try {
+        const { search } = req.body
+        const video = await VideoModel.find({ title: new RegExp(search, "i") });
+        res.status(200).render('user/search', { user: req.session.user, video, search })
+    } catch (error) {
+
     }
 })
 

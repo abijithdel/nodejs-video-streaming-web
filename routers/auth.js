@@ -68,12 +68,12 @@ router.post("/signin", async (req, res) => {
         const user = await UserModel.findOne({ email: email });
         if (!user) {
             error = "User not Found. Create a Account";
-            res.render("auth/signin", { user: false, error });
+            return res.render("auth/signin", { user: false, error });
         }
         const hash = await bcrypt.compare(password, user.password);
         if (!hash) {
             error = "incorrect password";
-            res.render("auth/signin", { user: false, error });
+            return res.render("auth/signin", { user: false, error });
         } else {
             req.session.user = user;
             req.session.login = true;

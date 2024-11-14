@@ -8,6 +8,8 @@ const videoStorage = multer.diskStorage({
       cb(null, 'public/videos/video');
     } else if (file.fieldname === 'thumbnail') {
       cb(null, 'public/videos/img');
+    } else if (file.fieldname === 'profile') {
+      cb(null, 'public/userprofile')
     }
   },
   filename: function (req, file, cb) {
