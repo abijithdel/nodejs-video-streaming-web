@@ -916,3 +916,42 @@ body {
     border: 1px solid black;
     background-color: aqua;
 }
+
+/* search-page */
+
+.search-page {
+    height: 90vh;
+    width: 100%;
+}
+
+.search-page .rap{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.search-page .rap .video{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.search-page .rap .video a{
+    width: 350px;
+    display: flex;
+    text-decoration: none;
+    color: white;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.search-page .rap .video a img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.search-page .rap .video a div{
+    color: gray;
+}

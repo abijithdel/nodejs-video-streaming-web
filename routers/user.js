@@ -269,9 +269,15 @@ routes.post('/search', async (req, res) => {
     try {
         const { search } = req.body
         const video = await VideoModel.find({ title: new RegExp(search, "i") });
+        if(video){
+            for(let x in video){
+                video[x].title = video[x].title.substring(0,50)
+            }
+        }
         res.status(200).render('user/search', { user: req.session.user, video, search })
     } catch (error) {
-
+        console.log(error)
+        res.send('Error')
     }
 })
 
