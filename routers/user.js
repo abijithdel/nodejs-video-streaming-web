@@ -176,7 +176,7 @@ routes.get('/account/:id', islogin, async (req, res) => {
             if (likes) {
                 likeCount = likes.vidoes.length
             }
-            if(playlist){
+            if (playlist) {
                 playlistCount = playlist.videos.length
             }
             res.status(200).render('user/account', { user: req.session.user, historyCount, likeCount, playlistCount })
@@ -315,34 +315,63 @@ routes.get('/add-play-list/:id', async (req, res) => {
                 { new: true, upsert: true }
             );
         }
-        res.status(200).json({ videoindb ,status:true })
+        res.status(200).json({ videoindb, status: true })
     } catch (error) {
-        res.status(406).json({ status:false })
+        res.status(406).json({ status: false })
         console.error(error)
     }
 })
 
-routes.get('/ac/playlist/:id',islogin, async (req,res) => {
+routes.get('/ac/playlist/:id', islogin, async (req, res) => {
     try {
         const uid = req.session.user._id
         let status
         let playlistvid = []
-        const playlist = await PlaylistModel.findOne({ user_id:uid })
-        if(playlist.videos.length > 0){
+        const playlist = await PlaylistModel.findOne({ user_id: uid })
+        if (playlist.videos.length > 0) {
             status = true
-            for(var key = 0;key < playlist.videos.length; key++){
+            for (var key = 0; key < playlist.videos.length; key++) {
                 const vid = playlist.videos[key].vid
                 const video = await VideoModel.findById(vid)
-                video.title = video.title.substring(0,50)
-                playlistvid.push(video)
+                if (video) {
+                    video.title = video.title.substring(0, 50)
+                    playlistvid.push(video)
+                }
             }
-        }else{
+        } else {
             status = false
         }
-        res.render('user/playlist',{user:req.session.user, status, playlistvid})
+        res.render('user/playlist', { user: req.session.user, status, playlistvid })
     } catch (error) {
         console.log(error)
-    }  
+    }
 })
+
+routes.get('/anime', async (req, res) => {
+    try {
+        const title = 'anime'
+        const video = await VideoModel.find({ category: new RegExp(title, "i") });
+        for (let key = 0; key < video.length; key++) {
+            video[key].title = video[key].title.substring(0, 50)
+        }
+        res.render('user/sp-category', { user: req.session.user, tabTitle: 'Anime', video })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+routes.get('/movie', async (req, res) => {
+    try {
+        const title = 'movie'
+        const video = await VideoModel.find({ category: new RegExp(title, "i") });
+        for (let key = 0; key < video.length; key++) {
+            video[key].title = video[key].title.substring(0, 50)
+        }
+        res.render('user/sp-category', { user: req.session.user, tabTitle: 'movie', video })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 
 module.exports = routes;

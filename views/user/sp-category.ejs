@@ -1,0 +1,18 @@
+<title><%= tabTitle %></title>
+<section class="sp-category-page">
+    <div class="container">
+        <a class="btn btn-outline-info" href="/"><i class="bi bi-arrow-left"></i> Back</a>
+    </div>
+    <div class="rap container">
+        <% for (let key in video) { %>
+        <a href="">
+            <img src="/videos/img/<%= video[key].img %>" alt="img">
+            <h5><%= video[key].title %></h5>
+            <div>
+                <span>Views <%= video[key].views %></span> | 
+                <span><%= video[key].category %></span>
+            </div>
+        </a>
+        <% } %>
+    </div>
+</section>

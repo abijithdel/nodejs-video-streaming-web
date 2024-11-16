@@ -48,16 +48,16 @@
 <div style="display: none;" class="header-menu mt-2">
   <a href="/"><i class="bi bi-house-door-fill"></i> Home</a>
   <br>
-  <a href="" class="mt-1"><i class="bi bi-record-circle"></i> Anime</a>
+  <a href="/anime" class="mt-1"><i class="bi bi-record-circle"></i> Anime</a>
   <br>
-  <a href="" class="mt-1 mb-2"><i class="bi bi-film"></i> Movie</a>
+  <a href="/movie" class="mt-1 mb-2"><i class="bi bi-film"></i> Movie</a>
   <br>
   <%if (user) { %>
     <%if (user.admin) { %>
       <a href="/admin" class="mt-1 mb-2"><i class="bi bi-palette"></i> Admin</a><br>
-      <a href="/account/<%= user._id %>" class="mt-1 mb-2"><i class="bi bi-person-circle"></i> Account</a>
       <br>
     <% } %>
+        <a href="/account/<%= user._id %>" class="mt-1 mb-2"><i class="bi bi-person-circle"></i> Account</a>
         <a href="/auth/logout" class="mt-1 mb-2 text-danger"><i class="bi bi-box-arrow-right"></i> Log Out</a> <br>
   <% } else { %>
         <a href="/auth/signin" class="mt-1 mb-2 "><i class="bi bi-person-fill-check"></i> Signin</a> <br>
