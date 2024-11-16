@@ -582,6 +582,10 @@ body {
     color: gray;
 }
 
+.video-page .video-div .video .info .description{
+    border-top: 1px solid white;
+}
+
 @media only screen and (max-width: 700px) {
     .video-page .video-div {
         flex-direction: column;
@@ -594,6 +598,10 @@ body {
 
     .video-page .video-div .suggestions {
         width: 100%;
+    }
+
+    .video-page .video-div .video .info .playlist-test{
+        display: none;
     }
 }
 
@@ -953,5 +961,38 @@ body {
 }
 
 .search-page .rap .video a div{
+    color: gray;
+}
+
+/* playlist-page */
+
+.playlist-page{ 
+    height: 90vh;
+    width: 100%;
+    overflow: auto;
+}
+
+.playlist-page .rap{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.playlist-page .rap a{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.playlist-page .rap a img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.playlist-page .rap a div{
     color: gray;
 }

@@ -7,6 +7,7 @@
             <a href="/" class="mt-1" title="Back button"><i class="bi bi-arrow-left"></i> <span>Back</span></a>
             <a href="/ac/history/<%= user._id %>" class="mt-2" title="History"><i class="bi bi-calendar3"></i> <span>History</span></a>
             <a href="/ac/likes/<%= user._id %>" class="mt-2" title="Likes"><i class="bi bi-hand-thumbs-up-fill"></i> <span>Likes</span></a>
+            <a href="/ac/playlist/<%= user._id %>" class="mt-2" title="Playlist"><i class="bi bi-card-list"></i> <span>Playlist</span></a>
             <%if (user.auth_type === 'email') { %>
             <a href="/ac/edit-profile/<%= user._id %>" class="mt-2" title="Edit Profile"><i class="bi bi-pen"></i> <span>Edit Profile</span></a>
             <% } %>

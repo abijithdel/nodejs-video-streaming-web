@@ -5,6 +5,7 @@ const HistoryModel = require('../config/schema/history')
 const LikeModel = require('../config/schema/likes')
 const UserModel = require('../config/schema/user')
 const upload = require('../config/multer')
+const PlaylistModel = require('../config/schema/playlist')
 
 function islogin(req, res, nest) {
     if (req.session.login) {
@@ -66,6 +67,11 @@ routes.get('/video/:id', islogin, async (req, res) => {
             vidoes: { $elemMatch: { vid: id } }
         });
 
+        const playlist = await PlaylistModel.findOne({
+            user_id: userId,
+            videos: { $elemMatch: { vid: id } }
+        });
+
         for (let key in videos) {
             const title = videos[key].title.substring(0, 30)
             videos[key].title = title
@@ -78,7 +84,7 @@ routes.get('/video/:id', islogin, async (req, res) => {
         }
 
         if (history) {
-            return res.status(200).render('user/video', { user: req.session.user, video, isliked, videos });
+            return res.status(200).render('user/video', { user: req.session.user, video, isliked, videos, playlist });
         } else {
             const newHistory = await HistoryModel.findOneAndUpdate(
                 { user_id: userId },
@@ -86,7 +92,7 @@ routes.get('/video/:id', islogin, async (req, res) => {
                 { new: true, upsert: true }
             );
             await VideoModel.findByIdAndUpdate(id, { $inc: { views: 1 } });
-            return res.status(200).render('user/video', { user: req.session.user, video, isliked, videos });
+            return res.status(200).render('user/video', { user: req.session.user, video, isliked, videos, playlist });
         }
     } catch (error) {
         console.error("Error occurred:", error);
@@ -163,11 +169,15 @@ routes.get('/account/:id', islogin, async (req, res) => {
             let playlistCount = 0
             const history = await HistoryModel.findOne({ user_id: id })
             const likes = await LikeModel.findOne({ user_id: id })
+            const playlist = await PlaylistModel.findOne({ user_id: id })
             if (history) {
                 historyCount = history.vidoes.length
             }
             if (likes) {
                 likeCount = likes.vidoes.length
+            }
+            if(playlist){
+                playlistCount = playlist.videos.length
             }
             res.status(200).render('user/account', { user: req.session.user, historyCount, likeCount, playlistCount })
         } catch (error) {
@@ -251,9 +261,9 @@ routes.post('/ac/edit/', upload.fields([{ name: 'profile' }]), async (req, res) 
         const { email } = req.body;
         const ProfileImg = req.files['profile'] ? req.files['profile'][0].filename : null;
         const user = await UserModel.findById(uid)
-        if(ProfileImg){
+        if (ProfileImg) {
             user.img = ProfileImg
-        }else{
+        } else {
             user.email = email
         }
         await user.save()
@@ -269,9 +279,9 @@ routes.post('/search', async (req, res) => {
     try {
         const { search } = req.body
         const video = await VideoModel.find({ title: new RegExp(search, "i") });
-        if(video){
-            for(let x in video){
-                video[x].title = video[x].title.substring(0,50)
+        if (video) {
+            for (let x in video) {
+                video[x].title = video[x].title.substring(0, 50)
             }
         }
         res.status(200).render('user/search', { user: req.session.user, video, search })
@@ -279,6 +289,60 @@ routes.post('/search', async (req, res) => {
         console.log(error)
         res.send('Error')
     }
+})
+
+routes.get('/add-play-list/:id', async (req, res) => {
+    try {
+        let videoindb
+        const userId = req.session.user._id
+        const videoId = req.params.id
+        const playlist = await PlaylistModel.findOne({
+            user_id: userId,
+            videos: { $elemMatch: { vid: videoId } }
+        });
+        if (playlist) {
+            videoindb = true;
+            await PlaylistModel.findOneAndUpdate(
+                { user_id: userId },
+                { $pull: { videos: { vid: videoId } } },
+                { new: true }
+            );
+        } else {
+            videoindb = false;
+            await PlaylistModel.findOneAndUpdate(
+                { user_id: userId },
+                { $push: { videos: { vid: videoId } } },
+                { new: true, upsert: true }
+            );
+        }
+        res.status(200).json({ videoindb ,status:true })
+    } catch (error) {
+        res.status(406).json({ status:false })
+        console.error(error)
+    }
+})
+
+routes.get('/ac/playlist/:id',islogin, async (req,res) => {
+    try {
+        const uid = req.session.user._id
+        let status
+        let playlistvid = []
+        const playlist = await PlaylistModel.findOne({ user_id:uid })
+        if(playlist.videos.length > 0){
+            status = true
+            for(var key = 0;key < playlist.videos.length; key++){
+                const vid = playlist.videos[key].vid
+                const video = await VideoModel.findById(vid)
+                video.title = video.title.substring(0,50)
+                playlistvid.push(video)
+            }
+        }else{
+            status = false
+        }
+        res.render('user/playlist',{user:req.session.user, status, playlistvid})
+    } catch (error) {
+        console.log(error)
+    }  
 })
 
 module.exports = routes;

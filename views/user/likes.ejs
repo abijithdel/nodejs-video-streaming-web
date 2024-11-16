@@ -6,7 +6,7 @@
         </div>
         <div class="videos container mt-3">
             <% for (let key in likesVid) { %>
-            <a href="">
+            <a href="/video/<%= likesVid[key]._id %>">
                 <img src="/videos/img/<%= likesVid[key].img %>" alt="img">
                 <h5><%= likesVid[key].title %></h5>
                 <div>

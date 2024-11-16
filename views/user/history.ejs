@@ -7,7 +7,7 @@
         </div>
         <div class="videos container mt-4">
             <% for (let key in historyVid) { %>
-            <a href="">
+            <a href="/video/<%= historyVid[key]._id %>">
                 <img src="/videos/img/<%= historyVid[key].img %>" alt="img">
                 <div>
                     <h5>Lorem Ipsum is simply dummy text of the printing and typesetting </h5>

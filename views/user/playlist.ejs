@@ -1,0 +1,22 @@
+<title>Playlist - <%= user.email %></title>
+<section class="playlist-page">
+    <div class="container">
+        <a class="btn btn-outline-info" href="/account/<%= user._id %>"><i class="bi bi-arrow-left"></i> Back</a>
+    </div>
+    <div class="rap container">
+        <%if (status) { %>
+            <% for(let key in playlistvid) { %>
+                <a href="/video/<%= playlistvid[key]._id %>" class="mt-5">
+                    <img src="/videos/img/<%= playlistvid[key].img %>" alt="img">
+                    <h5><%= playlistvid[key].title %></h5>
+                    <div>
+                        <span>Views <%= playlistvid[key].views %></span> | 
+                        <span><%= playlistvid[key].category %></span>
+                    </div>
+                </a>
+            <% } %>
+        <% } else { %>
+        <p class="text-center">Oops.! No Video</p>
+        <% } %>
+    </div>
+</section>
