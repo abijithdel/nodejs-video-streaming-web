@@ -1,4 +1,5 @@
 module.exports = {
+    DOMAIN: '', //only Name
     // Discord
     BOT_TOKEN: '',
     CLIENT_ID: '',

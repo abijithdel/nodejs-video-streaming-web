@@ -4,7 +4,7 @@ const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = require("./config");
+const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, DOMAIN } = require("./config");
 const UserModel = require("./config/schema/user");
 
 const app = express();
@@ -40,7 +40,7 @@ passport.use(
         {
             clientID: GOOGLE_CLIENT_ID,
             clientSecret: GOOGLE_CLIENT_SECRET,
-            callbackURL: "http://localhost:3000/auth/google/callback",
+            callbackURL: `http://${DOMAIN}/auth/google/callback`,
         },
         async function (accessToken, refreshToken, profile, done) {
             try {

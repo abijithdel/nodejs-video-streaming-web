@@ -324,28 +324,35 @@ routes.get('/add-play-list/:id', async (req, res) => {
 
 routes.get('/ac/playlist/:id', islogin, async (req, res) => {
     try {
-        const uid = req.session.user._id
-        let status
-        let playlistvid = []
-        const playlist = await PlaylistModel.findOne({ user_id: uid })
-        if (playlist.videos.length > 0) {
-            status = true
-            for (var key = 0; key < playlist.videos.length; key++) {
-                const vid = playlist.videos[key].vid
-                const video = await VideoModel.findById(vid)
-                if (video) {
-                    video.title = video.title.substring(0, 50)
-                    playlistvid.push(video)
-                }
-            }
-        } else {
-            status = false
+        const uid = req.session.user._id;
+        let status = false;
+        let playlistvid = [];
+
+        // Fetch playlist
+        const playlist = await PlaylistModel.findOne({ user_id: uid });
+
+        if (playlist && playlist.videos.length > 0) {
+            status = true;
+
+            // Collect all video IDs
+            const videoIds = playlist.videos.map(video => video.vid);
+
+            // Fetch all videos in one query
+            const videos = await VideoModel.find({ '_id': { $in: videoIds } });
+
+            // Process each video and add it to playlistvid
+            playlistvid = videos.map(video => {
+                video.title = video.title.substring(0, 50); // Limit title length
+                return video;
+            });
         }
-        res.render('user/playlist', { user: req.session.user, status, playlistvid })
+
+        res.render('user/playlist', { user: req.session.user, status, playlistvid });
     } catch (error) {
-        console.log(error)
+        console.error('Error fetching playlist:', error);
+        res.status(500).send('Internal Server Error');
     }
-})
+});
 
 routes.get('/anime', async (req, res) => {
     try {
