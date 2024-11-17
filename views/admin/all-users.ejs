@@ -36,8 +36,8 @@
 
                 <td><%= users[key].auth_type %></td>
                 <td>
-                    <a href="/edit-user/<%= users[key]._id %>" class="text-info"><i class="bi bi-pencil-square cursor-pointer"></i></a> | 
-                    <a href="/delete-user/<%= users[key]._id %>" class="text-danger"><i class="bi bi-trash3-fill cursor-pointer"></i></a>
+                    <a href="/admin/edit-user/<%= users[key]._id %>" class="text-white"><i class="bi bi-pencil-square cursor-pointer"></i></a> | 
+                    <a href="/admin/delete-user/<%= users[key]._id %>" class="text-danger"><i class="bi bi-trash3-fill cursor-pointer"></i></a>
                 </td>
               </tr>
               <% } %>

@@ -1,0 +1,38 @@
+<title>DELETE USER - <%= DELuser.email %>
+</title>
+
+<section class="admin-delete-user">
+    <div class="rap">
+        <h1>Are You Sure.?</h1>
+        <div class="user">
+            <img src="/userprofile/<%= DELuser.img %>" alt="" />
+            <div>
+                <h4>Email: <%= DELuser.email %>
+                </h4>
+                <p>Auth Type: <%= DELuser.auth_type %>
+                </p>
+                <p>Admin Status: <%= DELuser.admin%>
+                </p>
+                <Button onclick="deleteUser()">Delete User</Button>
+            </div>
+        </div>
+    </div>
+</section>
+<span id="uid" style="display: none;"><%= DELuser._id %></span>
+<script>
+    function deleteUser() {
+        const id = $('#uid').text()
+        $.ajax({
+            type: 'DELETE',
+            url: `/admin/delete-user/${id}`,
+            success: function (response) {
+                if(response.status){
+                    window.location.href = '/admin/all-users'
+                }
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    }
+</script>

@@ -141,5 +141,55 @@ routes.post('/edit-video/:id', upload.fields([{ name: 'thumbnail' }]), async (re
     }
 });
 
+routes.get('/edit-user/:id',islogin, isadmin, async (req,res) => {
+    try {
+        const id = req.params.id;
+        const EDuser = await UserModel.findById(id)
+        if(EDuser.auth_type != 'email'){
+            return res.send(`<h5> Oops.! Chack auth type, (this is ${EDuser.auth_type} user) </h5>`)
+        }
+        res.render('admin/edit-user', {user:req.session.user, EDuser})
+    } catch (error) {
+        
+    }
+})
+
+routes.post('/edit-user/:id',upload.fields([{ name: 'profile' }]), async (req,res) => {
+    try {
+        const { email } = req.body;
+        const id = req.params.id
+        const ProfileImg = req.files['profile'] ? req.files['profile'][0].filename : null;
+        const user = await UserModel.findById(id)
+        user.email = email
+        if(ProfileImg){
+            user.img = ProfileImg
+        }
+        await user.save()
+        res.redirect('/admin/all-users')
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+routes.get('/delete-user/:id',islogin, isadmin, async (req,res) => {
+    try {
+        const id = req.params.id
+        const DELuser = await UserModel.findById(id)
+        res.render('admin/delete-user',{user:req.session.user, DELuser})
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+routes.delete('/delete-user/:id', async (req,res) => {
+    try {
+        const id = req.params.id
+        await UserModel.findByIdAndDelete(id)
+    res.json({status:true})
+    } catch (error) {
+        res.json({status:false})
+        console.log(error)
+    }
+})
 
 module.exports = routes;

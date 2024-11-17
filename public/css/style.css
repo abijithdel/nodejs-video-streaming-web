@@ -10,6 +10,7 @@ body {
     cursor: pointer;
 }
 
+
 /* header */
 
 .header-container .rap {
@@ -1035,4 +1036,100 @@ body {
 .sp-category-page .rap a img{
     width: 100%;
     border-radius: 10px;
+}
+
+/* admin-edit-user */
+
+.admin-edit-user {
+    height: 80vh;
+    width: 100%;
+}
+
+.admin-edit-user .rap{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.admin-edit-user .rap form{
+    padding: 10px;
+    background-color: rgb(45, 53, 92);
+    border-radius: 10px;
+}
+
+.admin-edit-user .rap form input{
+    width: 100%;
+    height: 40px;
+    border-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 10px;
+}
+
+.admin-edit-user .rap form label{
+    margin-top: 10px;
+}
+
+.admin-edit-user .rap form button{
+    background-color: transparent;
+    color: aqua;
+    border: 1px solid aqua;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.admin-edit-user .rap form button:hover{
+    color: black;
+    border: 1px solid black;
+    background-color: aqua;
+}
+
+/* admin-delete-user */
+
+.admin-delete-user{
+    height: 80vh;
+    width: 100%;
+}
+
+.admin-delete-user .rap{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.admin-delete-user .rap .user {
+    text-align: center;
+}
+
+.admin-delete-user .rap .user img{
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    border: 2px solid rgb(45, 53, 92);
+}
+
+.admin-delete-user .rap .user div{
+    background-color: rgb(45, 53, 92);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.admin-delete-user .rap .user div button{
+    height: 40px;
+    width: 100px;
+    background-color: rgb(243, 7, 7);
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
 }

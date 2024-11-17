@@ -1,0 +1,21 @@
+<title>edit User- <%= EDuser.email %></title>
+<section class="admin-edit-user">
+    <div class="back-btn container mt-2">
+        <a class="btn btn-outline-info" href="/admin/all-users"><i class="bi bi-arrow-left"></i> Back</a>
+    </div>
+    <div class="rap">
+        <h3 class="text-center"><%= EDuser.email %></h3>
+        <form action="/admin/edit-user/<%= EDuser._id %>" method="post" enctype="multipart/form-data">
+            <label for="email">Email</label>
+            <br>
+            <input type="email" name="email" value="<%= EDuser.email %>" required>
+            <br>
+            <label for="profile">Img</label>
+            <br>
+            <input type="file" name="profile">
+            <br>
+            <img style="height: 50px; width: 50px; border-radius: 50%;" src="/userprofile/<%= EDuser.img %>" alt="img">
+            <br>
+            <button>Edit</button>
+        </form>
+    </div>
