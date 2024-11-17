@@ -22,8 +22,20 @@ function islogin(req, res, nest) {
 
 
 
-routes.get('/', islogin, isadmin, (req, res) => {
-    res.status(200).render('admin/admin', { user: req.session.user })
+routes.get('/', islogin, isadmin, async (req, res) => {
+    try {
+        let usersleng,videoleng,likesleng = 0
+        const users = await UserModel.find()
+        const videos = await VideoModel.find()
+        usersleng = users.length
+        videoleng = videos.length
+        for(let x = 0;x<videos.length;x++){
+            likesleng = likesleng + videos[x].like
+        }
+        res.status(200).render('admin/admin', { user: req.session.user, usersleng, videoleng, likesleng })
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 routes.get('/new-video', islogin, isadmin, (req, res) => {
