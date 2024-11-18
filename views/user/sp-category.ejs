@@ -5,7 +5,7 @@
     </div>
     <div class="rap container">
         <% for (let key in video) { %>
-        <a href="">
+        <a href="/video/<%= video[key]._id %>">
             <img src="/videos/img/<%= video[key].img %>" alt="img">
             <h5><%= video[key].title %></h5>
             <div>
